@@ -5,7 +5,7 @@ import './styles.css'
 const Modal = (props) => (
     <div>
 
-        { props.isOpen ? <div onClick={props.isClose} className="back-drop"/> : null }
+        {props.isOpen ? <div onClick={props.isClose} className="back-drop"/> : null}
 
         <div className="modal-wrapper"
              style={{
@@ -14,11 +14,11 @@ const Modal = (props) => (
              }}>
             <div className="modal-header">
                 <h3>{props.modalHeader}</h3>
-                <span className="close-modal-btn"  onClick={ props.isClose}>×</span>
+                <span className="close-modal-btn" onClick={props.isClose}>×</span>
             </div>
             <div className="modal-body">
 
-                    {props.children}
+                {props.children}
 
             </div>
             <div className="modal-footer">

@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 
 import './styles.css'
 
-class MartiansConsumers extends React.Component {
+export class MartiansConsumers extends React.Component {
 
     constructor(props) {
         super(props);
@@ -37,7 +37,12 @@ class MartiansConsumers extends React.Component {
     hideModal = () => {
         this.setState({
             show: false,
-            formErrors: {totalBudget: ''}
+            formErrors: {
+                totalBudget: ""
+            },
+            formData: {
+                total_budget: ""
+            }
         })
     }
 
@@ -53,7 +58,7 @@ class MartiansConsumers extends React.Component {
         let consumerComp = null;
 
         const {consumers} = this.props;
-        console.log('getCosumer:', consumers);
+
         if (consumers) {
             consumerComp = (
                 <Consumer
@@ -111,7 +116,7 @@ class MartiansConsumers extends React.Component {
     }
 
     render() {
-        const { show, formData, formValid, formErrors} = this.state;
+        const {show, formData, formValid, formErrors} = this.state;
         return (
             <div>
                 <h2> Martian Consumers </h2>

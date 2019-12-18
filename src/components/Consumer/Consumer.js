@@ -12,7 +12,7 @@ const Consumer = ({data, openModal}) => {
             <td>{consumer.date_of_first_purchase}</td>
             <td>{consumer.total_budget && formatAsCurrency(consumer.total_budget)}</td>
         </tr>
-    ))
+    ));
     return (
         <div>
             <table style={styles.table} className="table">
@@ -27,7 +27,7 @@ const Consumer = ({data, openModal}) => {
                 </tr>
                 </thead>
                 <tbody>
-                    {row}
+                {row}
                 </tbody>
             </table>
         </div>
