@@ -1,15 +1,16 @@
 import React from 'react';
 import styles from './styles.css';
+import {formatAsCurrency} from '../../utils/utils';
 
 const Consumer = ({data, openModal}) => {
     const row = data.map((consumer) => (
         <tr onClick={() => openModal(consumer)} key={consumer.id}>
             <th scope="row">{consumer.id}</th>
             <td>{consumer.name}</td>
-            <td>{consumer.budget.toFixed(2)}</td>
-            <td>{consumer.budget_spent.toFixed(2)}</td>
+            <td>{formatAsCurrency(consumer.budget)}</td>
+            <td>{formatAsCurrency(consumer.budget_spent)}</td>
             <td>{consumer.date_of_first_purchase}</td>
-            <td>{consumer.total_budget && consumer.total_budget.toFixed(2)}</td>
+            <td>{consumer.total_budget && formatAsCurrency(consumer.total_budget)}</td>
         </tr>
     ))
     return (

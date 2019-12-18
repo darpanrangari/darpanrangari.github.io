@@ -1,11 +1,11 @@
-import { FETCH_GITHUB_DATA, SET_CURRTENT_CONSUMER, UPDATE_CONSUMER } from './types';
+import { FETCH_CONSUMER_DATA, SET_CURRTENT_CONSUMER, UPDATE_CONSUMER } from './types';
 import axios from 'axios';
 
 const apiUrl = 'http://www.mocky.io/v2/5df7f38e320000f0612e02df';
 
 export const fetchData = (data) => {
     return {
-        type: FETCH_GITHUB_DATA,
+        type: FETCH_CONSUMER_DATA,
         data
     }
 };
