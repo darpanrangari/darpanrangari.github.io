@@ -1,0 +1,15 @@
+.form-element{
+	/*padding: 10px;*/
+	/*overflow: hidden;*/
+}
+label{
+	font-weight: bold;
+}
+
+input{
+	padding: 5px;
+	margin-left: 10px;
+}
+.error{
+	color:red;
+}
