@@ -1,37 +1,48 @@
-import {FETCH_CONSUMER_DATA, SET_CURRTENT_CONSUMER, UPDATE_CONSUMER} from './types';
-import axios from 'axios';
+import {FETCH_CURRENCIES, FETCH_LATEST_RATE} from './types';
+import openexchange from '../api/openexchange';
+import config from '../config/config'
 
-const apiUrl = 'http://www.mocky.io/v2/5df7f38e320000f0612e02df';
-
-export const fetchData = (data) => {
+const app_id = 'f3cec79a23274d3a985b6d04ea2b9fea'
+export const fetchCurrencyAction = (data) => {
     return {
-        type: FETCH_CONSUMER_DATA,
+        type: FETCH_CURRENCIES,
         data
     }
 };
 
-export const setCurrentConsumer = (data) => {
+export const fetchLatestRatesAction = (rates) => {
     return {
-        type: SET_CURRTENT_CONSUMER,
-        data
+        type: FETCH_LATEST_RATE,
+        rates
     }
-};
+}
 
-export const updateConsumer = (data) => {
-    return {
-        type: UPDATE_CONSUMER,
-        data
-    }
-};
-
-export const fetchConsumerData = () => {
+export const fetchCurrencies = () => {
     return (dispatch) => {
-        return axios.get(apiUrl)
+        return openexchange.get('/currencies.json')
             .then(response => {
-                dispatch(fetchData(response.data))
+                dispatch(fetchCurrencyAction(response.data))
             })
             .catch(error => {
                 throw(error);
             });
     };
 };
+
+export const fetchLatestRates = () => {
+    return (dispatch) => {
+        return openexchange.get(`/latest.json`, {
+            params: {
+                app_id,
+                base: config.baseCurrency,
+            }
+        })
+            .then(response => {
+                console.log(response.data, '**************')
+                dispatch(fetchLatestRatesAction(response.data))
+            })
+            .catch(error => {
+                throw(error)
+            })
+    }
+}

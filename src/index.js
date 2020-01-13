@@ -1,14 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import MartiansConsumers from './components/MartiansConsumers/MartiansConsumers';
-import rootReducer from './reducers';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import CurrencyExchange from './components/CurrencyExchange/CurrencyExchange';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import Pockets from './components/Pockets/Pockets'
+import Container from '@material-ui/core/Container';
+import store from './store/store.js'
+
+
 
 ReactDOM.render(
     <Provider store={store}>
-        <MartiansConsumers />
+        <Router>
+            <Container maxWidth="sm">
+                <Switch>
+                    <Route exact path="/" component={Pockets} />
+                    <Route path="/exchange" component={CurrencyExchange} />
+                </Switch>
+            </Container>
+        </Router>
     </Provider>, document.getElementById('root'));

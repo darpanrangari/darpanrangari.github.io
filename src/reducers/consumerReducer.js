@@ -1,29 +1,22 @@
-import { FETCH_CONSUMER_DATA,SET_CURRTENT_CONSUMER,UPDATE_CONSUMER } from '../actions/types';
+import {FETCH_CURRENCIES, FETCH_LATEST_RATE} from '../actions/types';
+import config from '../config/config'
+
 const initialState = {
-    consumers: [],
-    currentConsumer:{}
+    currencies: {},
+    rates: {},
+    baseCurrency: config.baseCurrency
 };
 export default function githubReducer(state = initialState, action) {
     switch (action.type) {
-        case FETCH_CONSUMER_DATA:
+        case FETCH_CURRENCIES:
             return {
                 ...state,
-                consumers: action.data
+                currencies: action.data
             };
-        case SET_CURRTENT_CONSUMER:
+        case FETCH_LATEST_RATE:
             return {
                 ...state,
-                currentConsumer: action.data
-            };
-        case UPDATE_CONSUMER:
-
-            const con = state.consumers.map(consumer => {
-                return consumer.id === action.data.id ? {...consumer, ...action.data} : consumer ;
-            });
-
-            return{
-                ...state,
-                consumers: [...con]
+                rates: action.rates
             };
         default:
             return state;
