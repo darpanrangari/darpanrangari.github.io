@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {currenciesMap} from '../../utils/utils';
-import {pocketBalance} from '../../utils/utils'
+
 import {Typography} from '@material-ui/core'
 import {
     FormControl,
@@ -29,8 +29,8 @@ class CurrencySelect extends React.Component {
     }
 
     render() {
-        const {selected, onSelectCurrency} = this.props;
-        const balance = pocketBalance(selected);
+        const {selected, onSelectCurrency, balance} = this.props;
+
         return (
             <div>
                 <FormControl variant="outlined" style={{margin:'10px 0'}}>

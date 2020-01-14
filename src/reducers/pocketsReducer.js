@@ -1,4 +1,4 @@
-import {FETCH_CURRENCIES} from '../actions/types';
+import {EXCHANGE_NOW} from '../actions/types';
 
 const initialState = {
     pockets: [
@@ -18,10 +18,40 @@ const initialState = {
 
 export default function pockets(state = initialState, action) {
     switch (action.type) {
-        case FETCH_CURRENCIES:
+        case EXCHANGE_NOW:
+
+            const con = state.pockets.map(pocket => {
+                // console.log(pocket.currency === action.data.currencyFrom,'*********');
+
+                if (pocket.currency === action.data.currencyFrom) {
+                    const debit = {
+                        currency: pocket.currency,
+                        balance: parseFloat(pocket.balance) - parseFloat(action.data.currencyFromValue)
+                    };
+
+                    return {...pocket, ...debit}
+                } else if (pocket.currency === action.data.currencyTo) {
+                    const debit = {
+                        currency: pocket.currency,
+                        balance: parseFloat(pocket.balance) + parseFloat(action.data.currencyToValue)
+                    };
+
+                    return {...pocket, ...debit}
+                } else {
+                    return pocket
+                }
+            });
+            const isPocketExists = state.pockets.find((pocket) => pocket.currency === action.data.currencyTo);
+            if (!isPocketExists) {
+                 con.push( {
+                    currency: action.data.currencyTo,
+                    balance: parseFloat(action.data.currencyToValue)
+                })
+
+            }
             return {
                 ...state,
-                consumers: action.data
+                pockets: [...con]
             };
         default:
             return state;

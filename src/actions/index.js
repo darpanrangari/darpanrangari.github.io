@@ -1,8 +1,9 @@
-import {FETCH_CURRENCIES, FETCH_LATEST_RATE} from './types';
+import {FETCH_CURRENCIES, FETCH_LATEST_RATE, EXCHANGE_NOW} from './types';
 import openexchange from '../api/openexchange';
 import config from '../config/config'
 
 const app_id = 'f3cec79a23274d3a985b6d04ea2b9fea'
+
 export const fetchCurrencyAction = (data) => {
     return {
         type: FETCH_CURRENCIES,
@@ -46,3 +47,12 @@ export const fetchLatestRates = () => {
             })
     }
 }
+
+export const exchangeNow = (data) => {
+    return (dispatch) => {
+        dispatch({
+            type: EXCHANGE_NOW,
+            data
+        })
+    };
+};
