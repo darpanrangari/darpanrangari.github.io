@@ -1,67 +1,49 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {currenciesMap} from '../../utils/utils';
-
 import {Typography} from '@material-ui/core'
 import {
     FormControl,
-    InputLabel,
     Select
 } from "@material-ui/core"
+import {getCurrencyChar} from '../../utils/utils'
 
-class CurrencySelect extends React.Component {
+const CurrencySelect = (props) => {
+    const {selected, onSelectCurrency, balance, currencies} = props;
 
-    constructor(props) {
-        super(props);
-
-        this.getOptions = this.getOptions.bind(this);
-    }
-
-    getOptions() {
-        const { currencies } = this.props
-
-        return currenciesMap(currencies).map(({name, value}, index) => {
+    const getOptions = () => {
+        return Object.keys(currencies).map((currency) => {
             return (
-                <option value={name}>{`${name} - ${value}`}</option>
+                <option key={currency} value={currency}>{currency}</option>
             )
         })
+    };
 
-    }
+    return (
+        <FormControl variant="outlined" style={{margin: '40px 0px 10px 0px'}}>
+            <Select
+                native
+                value={selected}
+                onChange={onSelectCurrency}
+            >
+                <option value=""/>
+                {getOptions()}
 
-    render() {
-        const {selected, onSelectCurrency, balance} = this.props;
+            </Select>
 
-        return (
-            <div>
-                <FormControl variant="outlined" style={{margin:'10px 0'}}>
-                    <Select
-                        native
-                        value={selected}
-                        onChange={onSelectCurrency}
-                    >
-                        <option value="" />
-                        {this.getOptions()}
+            <Typography style={{margin: '10px 0'}} variant="subtitle2" gutterBottom>
+                Balance: {`${getCurrencyChar(selected)} ${balance}`}
+            </Typography>
+        </FormControl>
+    );
+};
 
-                    </Select>
-                    <Typography variant="subtitle2" gutterBottom>
-                        Balance: {balance}
-                    </Typography>
-                </FormControl>
-            </div>
-        );
-    }
-}
 
 const mapStateToProps = state => {
     return {
         currencies: state.data.currencies,
     };
 };
-const mapDispatchToProps = {
-
-}
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps, {}
 )(CurrencySelect);

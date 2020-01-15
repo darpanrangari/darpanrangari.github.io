@@ -3,7 +3,6 @@ import config from '../config/config'
 
 const getCurrencyChar = (char) => {
     const currencyCodeChars = {
-        RUB: '₽',
         EUR: '€',
         GBP: '£',
         USD: '$'
@@ -65,7 +64,6 @@ const getExchangeRates = (value, to, from) => {
     if (from === base) {
         return ((rates[to]) * value).toFixed(2);
     }
-
 
     if (to === base) {
         return ((1 / rates[from]) * value).toFixed(2);

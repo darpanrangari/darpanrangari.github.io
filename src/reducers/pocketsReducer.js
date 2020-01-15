@@ -21,8 +21,12 @@ export default function pockets(state = initialState, action) {
         case EXCHANGE_NOW:
 
             const con = state.pockets.map(pocket => {
-                // console.log(pocket.currency === action.data.currencyFrom,'*********');
-
+                /**
+                 * Exchanging money between 'To' and 'From' pockets and based apply credit debit logic
+                 *
+                 * if the 'To' currency does'nt exits in the pockets then
+                 * create new pocket and add it to pockets
+                 */
                 if (pocket.currency === action.data.currencyFrom) {
                     const debit = {
                         currency: pocket.currency,

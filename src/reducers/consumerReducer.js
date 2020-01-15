@@ -6,6 +6,7 @@ const initialState = {
     rates: {},
     baseCurrency: config.baseCurrency
 };
+
 export default function githubReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_CURRENCIES:

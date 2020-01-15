@@ -6,7 +6,8 @@ const Pocket = ({data, onClickHandler}) => {
     return (
         <>
             <ListItem onClick={() => onClickHandler(data)}>
-                <ListItemText secondary={` Balance : ${getCurrencyChar(data.currency)} ${data.balance}`}>{data.currency} </ListItemText>
+                <ListItemText
+                    secondary={` Balance : ${getCurrencyChar(data.currency)} ${data.balance}`}>{data.currency} </ListItemText>
                 <ListItemText>{data.value}</ListItemText>
             </ListItem>
             <Divider/>

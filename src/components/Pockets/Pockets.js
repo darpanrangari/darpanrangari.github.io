@@ -1,11 +1,11 @@
 import React from 'react'
 import Pocket from '../Pocket/Pocket'
 import {connect} from 'react-redux';
-import Button from '@material-ui/core/Button';
 import {
     Paper, List
 } from '@material-ui/core';
 import Header from '../Header/Header';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 
 class Pockets extends React.Component {
     constructor(props) {
@@ -13,12 +13,17 @@ class Pockets extends React.Component {
         this.handlePocketClick = this.handlePocketClick.bind(this)
     }
 
-
+    /**
+     * Get all the available Pockets from state
+     * and create a list of pocket
+     *
+     * @returns {[<pocket1>,<pocket2>]}
+     */
     getPockets() {
         const {pockets} = this.props;
 
         if (pockets.length) {
-            return pockets.map((pocket, index) => {
+            return pockets.map((pocket) => {
                 return (
                     <Pocket
                         data={pocket}
@@ -30,24 +35,27 @@ class Pockets extends React.Component {
             })
         }
 
-        return <p> You dont not have any pockets</p>;
+        return <p> You don't not have any pockets</p>;
 
     }
 
-    handlePocketClick(data) {
-        console.log('clicked', data);
+    /**
+     * click handler for pocket
+     */
+    handlePocketClick() {
         this.props.history.push("/exchange")
     }
 
     render() {
         return (
             <Paper>
-                <Header heading="Pockets"/>
+
+                <Header icon={<AccountBalanceIcon/>} heading="Pockets"/>
 
                 <List component="nav" aria-label="pockets available">
-
                     {this.getPockets()}
                 </List>
+
             </Paper>
         )
     }
